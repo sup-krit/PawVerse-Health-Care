@@ -1,0 +1,19 @@
+const fs = require('fs');
+const path = require('path');
+const projectRoot = path.resolve(__dirname, '..');
+const sourceRoot = path.join(projectRoot, 'src');
+const css = fs.readFileSync(path.join(sourceRoot, 'studio.css'), 'utf8');
+const symbols = fs.readFileSync(path.join(sourceRoot, 'icons.svg'), 'utf8');
+const portrait = fs.readFileSync(path.join(sourceRoot, 'portrait.js'), 'utf8').trimEnd();
+const html = `<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#214f43"><title>PawVerse — Health Care Studio</title><style>${css}\n${fs.readFileSync(path.join(sourceRoot,'health.css'),'utf8')}</style></head>
+<body data-mobile="app">${symbols}
+<header class="studio-header"><div class="brand"><span class="mark"><svg class="icon"><use href="#i-paw"/></svg></span>PawVerse <span class="studio-label">HEALTH CARE STUDIO</span></div><div class="header-right"><span class="caption">A little care, every day.</span><span class="offline">ต้นแบบออฟไลน์ · ข้อมูลจำลอง</span><button class="outline" data-act="reset">เริ่มเดโมใหม่ ↺</button></div></header>
+<div class="mobile-switch"><button data-mobile="app" class="active">ลองใช้งาน UI</button><button data-mobile="docs">Flow & ข้อมูล</button><button data-mobile="screens">หน้าจอ</button></div>
+<main class="workspace"><aside class="sidebar" aria-label="รายการหน้าจอ"><h2>ดูแลกันในทุกวัน</h2><p class="subtle">Health care experience & system handoff<br>เลือกหน้าจอ แล้วทดลอง flow ได้จริง</p><div id="screen-menu"></div><div class="side-note">18 screens · 10 core journeys<br>Next.js / FastAPI / PostgreSQL<br><br>เดโม HTML นี้จำลองการทำงานในหน่วยความจำ ไม่มี API จริงหรือการส่งข้อมูลออก</div></aside>
+<section class="stage" aria-label="ต้นแบบ Health Care"><div class="device-caption"><span>Mobile experience · 393 × 852</span><span id="screen-position"></span></div><div class="device"><div class="phone"><div class="statusbar"><span>9:41</span><div class="island"></div><span>5G ▰</span></div><div id="appbar" class="appbar"></div><div id="app-main" class="app-main" tabindex="-1"></div><nav id="bottom-nav" class="bottom-nav" aria-label="เมนูสุขภาพ"></nav></div></div><p class="stage-note">ข้อมูลตัวอย่าง ณ 7 ก.ย. 2026 · ไม่มีการวินิจฉัยสุขภาพ<br>ทดลองแก้ไขได้ · รีโหลดหรือเริ่มเดโมใหม่เพื่อคืนค่า</p></section>
+<aside class="inspector" aria-label="คำอธิบายระบบ"><div class="inspector-tabs"><button class="active" data-doc="flow">Flow หน้านี้</button><button data-doc="atlas">ทุกฟังก์ชัน</button><button data-doc="architecture">ระบบ & ข้อมูล</button></div><div class="demo-controls"><label for="demo-role">ทดลองสิทธิ์</label><select id="demo-role"><option value="owner">Owner · อ่านและจัดการ</option><option value="coowner">Co-owner · เพิ่มประวัติ</option><option value="viewer">Viewer · อ่านอย่างเดียว</option></select><label for="demo-state">สถานะหน้าจอ</label><select id="demo-state"><option value="normal">Normal · ข้อมูลตัวอย่าง</option><option value="empty">Empty · ไม่มีข้อมูล</option><option value="loading">Loading · กำลังโหลด</option><option value="error">Error · โหลดไม่สำเร็จ</option><option value="denied">Denied · ไม่มีสิทธิ์</option></select></div><div id="doc-content"></div></aside></main>
+<dialog id="modal" aria-labelledby="modal-title"><div class="modal-head"><h2 id="modal-title"></h2><button class="round" data-act="close" aria-label="ปิดหน้าต่าง">×</button></div><div id="modal-body"></div></dialog><div id="toast" role="status" aria-live="polite" hidden></div>
+<script>'use strict';\n${portrait}\n${fs.readFileSync(path.join(sourceRoot,'health.js'),'utf8')}</script></body></html>`;
+fs.writeFileSync(path.join(projectRoot,'pawverse-health-uiux.html'),html);
+console.log('Built standalone HTML: '+Buffer.byteLength(html)+' bytes');
