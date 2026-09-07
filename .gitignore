@@ -5,3 +5,12 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+.idea/
+test-artifacts/

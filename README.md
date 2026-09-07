@@ -1,3 +1,7 @@
+# PawVerse Health Care — Flutter mobile demo
+
+The mobile implementation now lives in lib/. See [Flutter run instructions](docs/FLUTTER.md) and [milestone scope](docs/MILESTONE.md). The HTML prototype and its prior test artifacts below remain design references, not the mobile product.
+
 # PawVerse Health Care — Interactive Prototype
 
 ไฟล์เปิดใช้งาน: [pawverse-health-uiux.html](pawverse-health-uiux.html)
